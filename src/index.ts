@@ -3,8 +3,15 @@ import { routeState, mainland, paused, orderTasks } from './state'
 import { parseNodeRouteTag } from './routeTag'
 import { resolveNodeRouteTag } from './routeProbeResults'
 import { refresh, start } from './service'
+import { nodeAddressFamilies } from './addressFamilies'
 export { orderTasks }
 start()
+export const AddressFamilyBadges = {name:'IchigoAddressFamilyBadges',props:{node:{type:Object,required:true}},setup(props:any){return()=>{
+  const flags = nodeAddressFamilies(props.node, routeState.value.addressFamilies)
+  const families = (['ipv4','ipv6'] as const).filter(family => flags[family])
+  return families.length ? h('span',{class:'ichigo-ip-families',role:'group','aria-label':'已上报的 IP 协议'},families.map(family =>
+    h('span',{key:family,class:['ichigo-ip-badge',family==='ipv4'?'ichigo-ip-badge--v4':'ichigo-ip-badge--v6'],title:'节点已上报 '+(family==='ipv4'?'IPv4':'IPv6')+'；不代表公网连通性'},family==='ipv4'?'IPv4':'IPv6'))) : null
+}}}
 const carriers = [{key:'CT',name:'电信',icon:'电',tone:'telecom'}, {key:'CU',name:'联通',icon:'联',tone:'unicom'}, {key:'CM',name:'移动',icon:'移',tone:'mobile'}]
 export function domesticFacts(tasks:any[]){
   const latency=tasks.filter(t=>t.hasData!==false&&t.avgLoss!==100).map(t=>t.avgLatency).filter(v=>Number.isFinite(v)&&v>=0)
@@ -28,7 +35,7 @@ export const RoutePanel={name:'AzeRoutePanel',props:{node:{type:Object,required:
     const title=e?`${cl?.label} · ${e.asns.join(' → ')||'无骨干跳点'} · ${cl?.evidence}`:footer
     return h('div',{class:['aze-rp-tile',c.tone,cl?.confidence||'empty',stale?'stale':''],key:c.key,title},[
       h('span',{class:'aze-rp-carrier'},[h('i',{class:'aze-rp-icon','aria-hidden':'true'},c.icon),c.name]),
-      h('strong',{class:'aze-rp-value'},label),h('span',{class:'aze-rp-note'},cl?.grade || (e?'不作线路定级':'暂无线路证据'))])
+      h('strong',{class:'aze-rp-value'},label),h('span',{class:'aze-rp-note','data-route-grade':cl?.grade || 'ungraded'},cl?.grade || (e?'不作线路定级':'暂无线路证据'))])
   })
   return h('section',{class:['aze-route-panel',isLocal?'local':'return'], 'data-route-node':n.uuid,'aria-label':isLocal?'本地链路':'三网回程'},[
     h('div',{class:'aze-rp-head'},[h('span',{class:'aze-rp-title'},[h('span',{'aria-hidden':'true',class:'aze-rp-mark'},isLocal?'◈':'⇄'),isLocal?'本地链路':'三网回程']),h('span',{class:['aze-rp-status',pending?'pending':'']},status),
