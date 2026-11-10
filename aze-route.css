@@ -28,22 +28,3 @@
 .aze-rp-dot { width:4px; height:4px; border-radius:50%; flex-shrink:0; background:var(--primary); opacity:.7; }
 @media(max-width:420px) { .aze-rp-value{font-size:11px} }
 
-/* Keep each desktop server card and its route slot at the same 4/3 scale. */
-@media(min-width:1200px) {
-  :root.reze-theme .home-view .nodes .node-card {height:746.666666667px!important;min-height:746.666666667px!important;max-height:746.666666667px!important}
-  :root.reze-theme .home-view .nodes .node-card .aze-route-panel {height:176px;min-height:176px;max-height:176px;padding:13.333333333px;border-width:1.333333333px;border-radius:17.333333333px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-head {gap:8px;height:22.666666667px;margin-bottom:10.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-title {gap:6.666666667px;font-size:13.333333333px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-mark {font-size:17.333333333px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-status {font-size:10.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-refresh {width:24px;height:24px;border-width:1.333333333px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-refresh svg {width:14.666666667px;height:14.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-grid {gap:8px;height:88px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-tile {gap:5.333333333px;padding:6.666666667px 8px;border-width:1.333333333px;border-radius:10.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-carrier {gap:5.333333333px;font-size:12px;line-height:16px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-icon {width:18.666666667px;height:18.666666667px;border-radius:6.666666667px;font-size:10.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-value {min-height:20px;font-size:14.666666667px;line-height:20px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-note {font-size:9.333333333px;line-height:13.333333333px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-foot {gap:6.666666667px;height:18.666666667px;margin-top:8px;font-size:10.666666667px;line-height:18.666666667px}
-  :root.reze-theme .home-view .nodes .node-card .aze-rp-dot {width:5.333333333px;height:5.333333333px}
-}
