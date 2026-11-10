@@ -135,6 +135,40 @@
 :root.reze-theme .ichigo-preview-emblem {display:block;width:20px;height:20px;object-fit:contain;flex-shrink:0}
 :root.reze-theme .ichigo-bubble-emblem {display:block;width:14px;height:14px;object-fit:contain;flex-shrink:0}
 
+/* Compact protocol labels fit the existing uptime and billing strip. */
+:root.reze-theme .node-card .ichigo-ip-families {display:inline-flex;align-items:center;gap:.3em;flex-shrink:0;font-size:var(--ichigo-ip-label-size,11px);line-height:1.2}
+:root.reze-theme .node-card .ichigo-ip-badge {display:inline-flex;align-items:center;flex-shrink:0;padding:.1em .45em;border:1px solid currentColor;border-radius:.4em;font-weight:600;white-space:nowrap}
+:root.reze-theme .node-card .ichigo-ip-badge--v4 {color:#8dbce6;background:rgb(65 139 206 / .08);border-color:rgb(141 188 230 / .32)}
+:root.reze-theme .node-card .ichigo-ip-badge--v6 {color:#e3b17c;background:rgb(210 148 83 / .08);border-color:rgb(227 177 124 / .32)}
+
+/* Enlarge only desktop server cards. Tailwind's inherited spacing and text
+   variables resize their actual layout rather than scaling a painted image. */
+@media(min-width:1200px) {
+  :root.reze-theme .home-view .nodes [role="tabpanel"] > .grid:has(.node-card) {grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+  :root.reze-theme .home-view .nodes .node-card {
+    --spacing:.333333333rem;
+    --text-xs:1rem;--text-sm:1.166666667rem;--text-base:1.333333333rem;--text-lg:1.5rem;--text-xl:1.666666667rem;
+    --ichigo-ip-label-size:14.666666667px;
+    font-size:1.333333333rem;border-radius:18.666666667px!important;
+  }
+  :root.reze-theme .home-view .nodes .node-card [class~="text-[9px]"] {font-size:12px!important}
+  :root.reze-theme .home-view .nodes .node-card :is([class~="text-[10px]"],[class~="!text-[10px]"]) {font-size:13.333333333px!important}
+  :root.reze-theme .home-view .nodes .node-card :is([class~="text-[11px]"],[class~="!text-[11px]"]) {font-size:14.666666667px!important}
+  :root.reze-theme .home-view .nodes .node-card [class~="h-[19px]"] {height:25.333333333px}
+  :root.reze-theme .home-view .nodes .node-card .gloria-node-state {font-size:.693333333rem}
+  :root.reze-theme .home-view .nodes .node-card .ichigo-node-emblem {width:33.333333333px;height:33.333333333px}
+  :root.reze-theme .home-view .nodes .node-card svg[width="11"] {width:14.666666667px;height:14.666666667px}
+  :root.reze-theme .home-view .nodes .node-card svg[width="12"] {width:16px;height:16px}
+  :root.reze-theme .home-view .nodes .node-card svg[width="13"] {width:17.333333333px;height:17.333333333px}
+  :root.reze-theme .home-view .nodes .node-card svg[width="14"] {width:18.666666667px;height:18.666666667px}
+  :root.reze-theme .home-view .nodes .node-card .relative.w-full.overflow-hidden.rounded-full.bg-muted {height:5.333333333px!important}
+  :root.reze-theme .home-view .nodes .node-card .node-ping-task-grid {grid-template-columns:minmax(4rem,.62fr) minmax(0,1fr) minmax(0,1fr)}
+  :root.reze-theme .home-view .nodes .node-card .rounded-lg {border-radius:13.333333333px}
+  :root.reze-theme .home-view .nodes .node-card .rounded-md {border-radius:10.666666667px}
+  :root.reze-theme .home-view .nodes .node-card .rounded-sm {border-radius:8px}
+  :root.reze-theme .home-view .nodes .node-card .rounded-xl {border-radius:18.666666667px}
+}
+
 /* The unlock panel uses the same opaque shell as the forecast panel. Runtime
    theme sampling must not reintroduce the page's character wallpaper. */
 :root.reze-theme #km-unlock-floating-root {
