@@ -4,7 +4,8 @@
 # The supervised helper runs as root so ICMP traceroute can use CAP_NET_RAW.
 # Agent credentials are read from /dev/tty or reused from the existing config.
 set -eu
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# OpenRC calls shell_var, mountinfo and checkpath from its private bin directory.
+PATH=/usr/libexec/rc/bin:/lib/rc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH
 umask 077
 
@@ -174,7 +175,7 @@ umask="0077"
 output_log="/var/log/transit-route-probe.log"
 error_log="/var/log/transit-route-probe.log"
 required_files="/etc/transit-route-probe.conf /usr/local/libexec/transit-route-probe/helper.sh /usr/local/libexec/transit-route-probe/collect-return-route.sh"
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=/usr/libexec/rc/bin:/lib/rc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export RUNTIME_DIRECTORY="/run/transit-route-probe"
 
 depend() {
