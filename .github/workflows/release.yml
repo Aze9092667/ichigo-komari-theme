@@ -1,0 +1,97 @@
+name: Build and release theme
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish a Release from the current main branch'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+      tag: ${{ steps.metadata.outputs.tag }}
+      commit: ${{ steps.metadata.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && 'refs/heads/main' || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify version and record built commit
+        id: metadata
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs'
+          import { execFileSync } from 'node:child_process'
+          const theme = JSON.parse(fs.readFileSync('komari-theme.json', 'utf8'))
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+          if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(theme.version) || theme.version !== pkg.version) {
+            throw new Error('Theme and package versions must match and be valid release versions.')
+          }
+          const tag = `v${theme.version}`
+          if (process.env.GITHUB_EVENT_NAME !== 'workflow_dispatch' && process.env.GITHUB_REF_TYPE === 'tag' && process.env.GITHUB_REF_NAME !== tag) {
+            throw new Error(`Expected tag ${tag}`)
+          }
+          const commit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `version=${theme.version}\ntag=${tag}\ncommit=${commit}\n`)
+          NODE
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      - run: npm run build
+      - run: npm run package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Ichigo-Komari-Theme
+          path: release/Ichigo-Komari-Theme.zip
+          if-no-files-found: error
+
+  release:
+    if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')) || (github.event_name == 'workflow_dispatch' && inputs.publish)
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Ichigo-Komari-Theme
+          path: release
+      - name: Publish installable ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ needs.build.outputs.tag }}
+          BUILD_COMMIT: ${{ needs.build.outputs.commit }}
+        run: |
+          if gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --silent 2>/dev/null; then
+            tag_commit=$(gh api "repos/$GH_REPO/commits/$RELEASE_TAG" --jq .sha)
+            if [ "$tag_commit" != "$BUILD_COMMIT" ]; then
+              echo "Tag $RELEASE_TAG points to another commit. Bump the theme version before publishing."
+              exit 1
+            fi
+          else
+            gh api --method POST "repos/$GH_REPO/git/refs" -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$BUILD_COMMIT"
+          fi
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" release/Ichigo-Komari-Theme.zip --clobber
+          else
+            gh release create "$RELEASE_TAG" release/Ichigo-Komari-Theme.zip --verify-tag --title "$RELEASE_TAG" --generate-notes
+          fi
