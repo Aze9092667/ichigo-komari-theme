@@ -38,6 +38,7 @@
 :root.reze-theme.dark .reze-hero__portrait-shade {background:linear-gradient(90deg,#142a3e 0%,rgb(20 42 62 / .8) 14%,rgb(20 42 62 / .2) 34%,transparent 52%),linear-gradient(0deg,rgb(8 21 35 / .52),transparent 48%)!important}
 :root.reze-theme .reze-world-map__heading {background:transparent!important;box-shadow:none!important;border:0!important}
 :root.reze-theme .reze-world-map {--map-empty:rgb(151 182 210 / .08);--map-outline:rgb(151 182 210 / .24);--map-destination:var(--primary)}
+:root.reze-theme .reze-companion {display:none!important}
 :root.reze-theme .reze-companion__bubble {background:var(--reze-panel);border-color:var(--reze-rule)}
 :root.reze-theme .reze-companion__character {height:122px;width:98px}
 :root.reze-theme .reze-companion__character img {object-fit:contain;filter:drop-shadow(0 4px 8px rgb(3 15 28 / .3))}
@@ -134,6 +135,17 @@
 /* Small emblems retain the transparent cutout's own proportions. */
 :root.reze-theme .ichigo-preview-emblem {display:block;width:20px;height:20px;object-fit:contain;flex-shrink:0}
 :root.reze-theme .ichigo-bubble-emblem {display:block;width:14px;height:14px;object-fit:contain;flex-shrink:0}
+
+/* Compact protocol labels fit the existing uptime and billing strip. */
+:root.reze-theme .node-card .ichigo-ip-families {display:inline-flex;align-items:center;gap:.3em;flex-shrink:0;font-size:var(--ichigo-ip-label-size,11px);line-height:1.2}
+:root.reze-theme .node-card .ichigo-ip-badge {display:inline-flex;align-items:center;flex-shrink:0;padding:.1em .45em;border:1px solid currentColor;border-radius:.4em;font-weight:600;white-space:nowrap}
+:root.reze-theme .node-card .ichigo-ip-badge--v4 {color:#8dbce6;background:rgb(65 139 206 / .08);border-color:rgb(141 188 230 / .32)}
+:root.reze-theme .node-card .ichigo-ip-badge--v6 {color:#e3b17c;background:rgb(210 148 83 / .08);border-color:rgb(227 177 124 / .32)}
+
+/* Keep the original card proportions in a four-column desktop grid. */
+@media(min-width:1200px) {
+  :root.reze-theme .home-view .nodes [role="tabpanel"] > .grid:has(.node-card) {grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
 
 /* The unlock panel uses the same opaque shell as the forecast panel. Runtime
    theme sampling must not reintroduce the page's character wallpaper. */

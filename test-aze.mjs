@@ -16,7 +16,7 @@ const c=vm.createContext({Date,console,AbortSignal,navigator:{},document:{hidden
  else throw Error('Unexpected '+path)
  return {ok:true,json:async()=>({data})}
 }})
-for(const f of ['state','routeClassification','routeTag','routeProbeResults','service','index'])vm.runInContext(source(f),c)
+for(const f of ['addressFamilies','state','routeClassification','routeTag','routeProbeResults','service','index'])vm.runInContext(source(f),c)
 const now=Math.floor(Date.now()/1000),tag=`transit-route:ct=4134.4134,cu=9929.9929.4837,cm=58807.9808@${now}`
 assert.equal(c.domesticFacts([{hasData:false,avgLatency:0,avgLoss:0}])[1].value,'等待采样')
 assert.equal(c.domesticFacts([{hasData:true,avgLatency:0,avgLoss:100}])[1].value,'等待采样')

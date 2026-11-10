@@ -1,6 +1,7 @@
 import { a as shallowRef } from './vue-vendor-D4cUfCy9.js'
+import type { AddressFamilySummary } from './addressFamilies'
 export const THEME = 'Reze-Route'
-export const routeState = shallowRef({ settings: {} as Record<string, any>, nodes: [] as any[], results: {} as Record<string,string>, admin: false, busy: false, status: '', jobs: {} as Record<string,any>, helpers: {} as Record<string,any> })
+export const routeState = shallowRef({ settings: {} as Record<string, any>, nodes: [] as any[], results: {} as Record<string,string>, addressFamilies: {} as AddressFamilySummary, admin: false, busy: false, status: '', jobs: {} as Record<string,any>, helpers: {} as Record<string,any> })
 export const update = (patch: Partial<typeof routeState.value>) => { routeState.value = { ...routeState.value, ...patch } }
 export function mainland(node: any) {
   const region = String(node.region || '')

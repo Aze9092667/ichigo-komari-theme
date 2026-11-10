@@ -2,7 +2,7 @@
   "name": "Ichigo · BLEACH / 三网回程版",
   "short": "Reze-Route",
   "description": "Ichigo / BLEACH 定制 Komari 主题：深色蓝灰玻璃、三网回程、等高卡片和多目标延迟。",
-  "version": "1.2.3-aze.12",
+  "version": "1.2.3-aze.16",
   "author": "Reze Theme Contributors",
   "preview": "dist/images/ichigo/preview-ichigo-aze12.png",
   "configuration": {
@@ -566,6 +566,13 @@
         "type": "switch",
         "default": true,
         "help": "管理员打开前台时检测已连接的境外助手；超过 7 天时补采。国内节点及已标记 route-probe:paused 的节点不参与。"
+      },
+      {
+        "key": "azeNodeAddressFamilies",
+        "name": "节点 IP 协议摘要 JSON",
+        "type": "string",
+        "default": "{}",
+        "help": "管理员访问时自动同步公开节点的 IPv4/IPv6 标记，仅保存布尔值，不保存 IP 地址。标签表示已上报协议，不代表公网连通性。"
       }
     ],
     "icon": "/themes/Reze-Route/dist/images/ichigo/favicon-v10.png"

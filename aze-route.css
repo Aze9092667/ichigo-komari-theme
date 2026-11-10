@@ -17,8 +17,14 @@
 .aze-rp-tile.mobile .aze-rp-icon { color:#87aec3; background:#87aec318; }
 .aze-rp-value { display:block; min-height:15px; overflow:hidden; font-size:11px; font-weight:650; line-height:15px; white-space:nowrap; text-overflow:ellipsis; }
 .aze-rp-note { display:block; overflow:hidden; font-size:7px; line-height:10px; color:var(--muted-foreground); opacity:.7; white-space:nowrap; text-overflow:ellipsis; }
+/* Grade accents affect only the existing return-route grade, never its evidence. */
+.aze-route-panel.return .aze-rp-note[data-route-grade] { color:#a8b3c2; opacity:1; }
+.aze-route-panel.return .aze-rp-note[data-route-grade="普通线路"] { color:#7fb5e6; }
+.aze-route-panel.return .aze-rp-note[data-route-grade="优质线路"] { color:#c49aff; }
+.aze-route-panel.return .aze-rp-note[data-route-grade="精品线路"] { color:#ffbd4a; }
 .aze-rp-tile.mixed { border-style:dashed; }
 .aze-rp-tile.empty .aze-rp-value,.aze-rp-tile.inconclusive .aze-rp-value,.aze-rp-tile.stale .aze-rp-value { color:var(--muted-foreground); font-weight:500; }
 .aze-rp-foot { display:flex; align-items:center; gap:5px; overflow:hidden; height:14px; margin-top:6px; white-space:nowrap; font-size:8px; line-height:14px; color:var(--muted-foreground); }
 .aze-rp-dot { width:4px; height:4px; border-radius:50%; flex-shrink:0; background:var(--primary); opacity:.7; }
 @media(max-width:420px) { .aze-rp-value{font-size:11px} }
+
