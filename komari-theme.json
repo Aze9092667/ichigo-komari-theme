@@ -4,7 +4,7 @@
   "description": "Ichigo / BLEACH 定制 Komari 主题：深色蓝灰玻璃、三网回程、等高卡片和多目标延迟。",
   "version": "1.2.3-aze.12",
   "author": "Reze Theme Contributors",
-  "preview": "preview.png",
+  "preview": "dist/images/ichigo/preview-ichigo-aze12.png",
   "configuration": {
     "type": "managed",
     "name": "Ichigo · 外观、监控与回程",
