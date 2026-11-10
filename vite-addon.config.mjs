@@ -1,0 +1,1 @@
+export default { build:{lib:{entry:'src/index.ts',formats:['es'],fileName:()=> 'aze-route-v123.js'},outDir:'addon-build',emptyOutDir:true,target:'es2022',rollupOptions:{external:['./vue-vendor-D4cUfCy9.js']}} }

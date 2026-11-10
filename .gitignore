@@ -1,0 +1,7 @@
+node_modules/
+addon-build/
+release/
+*.log
+.DS_Store
+__pycache__/
+*.pyc
