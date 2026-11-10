@@ -1,0 +1,193 @@
+/* Colors follow the supplied blue portrait, with orange hair as the accent. */
+:root.reze-theme {
+  --background:#dfeaf4; --foreground:var(--glass-light-text,#20374b);
+  --card:#e2eef8; --card-foreground:#20374b; --popover:#edf4fa; --popover-foreground:#20374b;
+  --primary:#a66226; --primary-foreground:#fff9f2; --secondary:#d4e3ef; --secondary-foreground:#20374b;
+  --muted:#cadce9; --muted-foreground:var(--glass-light-muted-text,#59728a);
+  --accent:#d7e8f5; --accent-foreground:#20374b; --border:#789fb752; --input:#789fb752; --ring:#b87937;
+  --reze-panel:rgb(226 238 248 / .92); --reze-paper:#edf4fb; --reze-rule:rgb(98 139 172 / .28); --reze-gold:#a66226;
+  --selection:#b87937; --info:#3f7dac;
+  --chart-1:#d89852; --chart-2:#81b6de; --chart-3:#94a9c3; --chart-4:#b87937; --chart-5:#628dad;
+}
+:root.reze-theme.dark {
+  --background:#0c1928; --foreground:var(--glass-dark-text,#edf4fb);
+  --card:#122235; --card-foreground:#edf4fb; --popover:#162b40; --popover-foreground:#edf4fb;
+  --primary:#edb373; --primary-foreground:#102033; --secondary:#1c354d; --secondary-foreground:#edf4fb;
+  --muted:#203b53; --muted-foreground:var(--glass-dark-muted-text,#b5c8da);
+  --accent:#27465f; --accent-foreground:#edf4fb; --border:#97c0e23d; --input:#97c0e233; --ring:#edb373;
+  --reze-panel:rgb(18 36 55 / .92); --reze-rule:rgb(151 192 226 / .25); --reze-gold:#edb373;
+  --selection:#edb373; --info:#96c6e8;
+}
+:root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card),
+:root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card):hover {
+  background:linear-gradient(135deg,rgb(132 180 220 / .055),transparent 58%),var(--reze-glass-surface)!important;
+  border-color:var(--reze-rule)!important;
+  box-shadow:inset 0 1px rgb(219 238 255 / .13),0 12px 34px rgb(2 12 24 / .16)!important;
+}
+:root.reze-theme :is(.node-card,.gloria-stat-card):before {background:linear-gradient(90deg,transparent,#80b2d8,#edb373,transparent)!important}
+:root.reze-theme .reze-header {background:rgb(228 239 248 / .89)!important;border-color:var(--reze-rule)!important}
+:root.reze-theme.dark .reze-header {background:rgb(13 28 44 / .9)!important}
+:root.reze-theme .background-container .reze-scrim {background:linear-gradient(180deg,rgb(221 234 245 / var(--reze-background-light-start)),rgb(215 231 244 / var(--reze-background-light-end)) 85%)!important}
+:root.reze-theme.dark .background-container .reze-scrim {background:linear-gradient(180deg,rgb(8 22 38 / var(--reze-background-dark-start)),rgb(9 24 41 / var(--reze-background-dark-end)) 85%)!important}
+:root.reze-theme .default-background {background-position:center 40%!important}
+:root.reze-theme .reze-hero {background:linear-gradient(120deg,#e7f1f9,#d9e9f5 55%,#d9e9f5);border-color:var(--reze-rule)}
+:root.reze-theme.dark .reze-hero {background:linear-gradient(120deg,#102334,#142a3e 55%,#142a3e)}
+:root.reze-theme .reze-hero__portrait {width:60%}
+:root.reze-theme .reze-hero__portrait img {object-position:50% 42%}
+:root.reze-theme .reze-hero__portrait-shade {background:linear-gradient(90deg,#dfeef8 0%,rgb(223 238 248 / .72) 16%,transparent 52%),linear-gradient(0deg,rgb(16 40 60 / .26),transparent 48%)!important}
+:root.reze-theme.dark .reze-hero__portrait-shade {background:linear-gradient(90deg,#142a3e 0%,rgb(20 42 62 / .8) 14%,rgb(20 42 62 / .2) 34%,transparent 52%),linear-gradient(0deg,rgb(8 21 35 / .52),transparent 48%)!important}
+:root.reze-theme .reze-world-map__heading {background:transparent!important;box-shadow:none!important;border:0!important}
+:root.reze-theme .reze-world-map {--map-empty:rgb(151 182 210 / .08);--map-outline:rgb(151 182 210 / .24);--map-destination:var(--primary)}
+:root.reze-theme .reze-companion__bubble {background:var(--reze-panel);border-color:var(--reze-rule)}
+:root.reze-theme .reze-companion__character {height:122px;width:98px}
+:root.reze-theme .reze-companion__character img {object-fit:contain;filter:drop-shadow(0 4px 8px rgb(3 15 28 / .3))}
+/* The supplied BLEACH lettering keeps a transparent field, so the hero's own
+   blue surface remains visible through and around the letters. */
+:root.reze-theme .reze-hero__copy {display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+:root.reze-theme .reze-hero .ichigo-brand-title {margin:0;width:min(470px,100%);line-height:1;letter-spacing:0}
+:root.reze-theme .ichigo-brand-logo {display:block;width:100%;height:auto;object-fit:contain;filter:brightness(.23) sepia(.4) saturate(1.5) hue-rotate(155deg)}
+:root.reze-theme.dark .ichigo-brand-logo {filter:drop-shadow(0 3px 12px rgb(2 13 24 / .18))}
+:root.reze-theme .reze-hero__actions {margin-top:32px}
+:root.reze-theme .ichigo-node-emblem {display:block;width:25px;height:25px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 1px 1px rgb(255 255 255 / .25))}
+:root.reze-theme .ichigo-node-emblem.is-offline {opacity:.5;filter:grayscale(1)}
+:root.reze-theme .ichigo-map-emblem {display:block;width:24px;height:24px;object-fit:contain;filter:drop-shadow(0 1px 1px rgb(255 255 255 / .2))}
+:root.reze-theme .ichigo-header-emblem {display:block;width:36px;height:auto;object-fit:contain;filter:drop-shadow(0 1px 2px rgb(2 13 24 / .2))}
+:root.reze-theme .reze-brand__text strong {text-transform:none}
+@media(max-width:768px) {
+  :root.reze-theme .ichigo-header-emblem {width:28px}
+  :root.reze-theme .reze-hero__copy {width:100%}
+  :root.reze-theme .reze-hero .ichigo-brand-title {width:min(320px,86%)}
+  :root.reze-theme .reze-hero__actions {margin-top:28px;flex-wrap:wrap;row-gap:12px}
+  :root.reze-theme .reze-hero__portrait {width:82%;opacity:.48}
+  :root.reze-theme .reze-hero__portrait-shade {background:linear-gradient(90deg,#dfeef8,transparent 94%)!important}
+  :root.reze-theme.dark .reze-hero__portrait-shade {background:linear-gradient(90deg,#142a3e,transparent 94%)!important}
+  :root.reze-theme .reze-hero__portrait img {object-position:52% 40%}
+  :root.reze-theme .reze-companion__character {height:84px;width:70px}
+}
+@media(prefers-reduced-transparency:reduce) {
+  :root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map),
+  :root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map):hover {background:var(--reze-glass-solid)!important}
+}
+
+/* NetForecast overrides */
+/* Keep the forecast panel independent of the page wallpaper sampled at runtime. */
+:root.reze-theme #nf-floating-widget {
+  --nf-panel-solid:#e2eef8;
+  --nf-page-bg:var(--nf-panel-solid)!important;
+  --nf-card-bg:var(--nf-panel-solid)!important;
+  --nf-page-image:none!important;
+  --nf-card-image:none!important;
+  --nf-text:var(--foreground,#20374b)!important;
+  --nf-card-text:var(--foreground,#20374b)!important;
+  --nf-muted:var(--muted-foreground,#59728a)!important;
+  --nf-accent:var(--primary,#a66226)!important;
+  --nf-border:1px solid var(--reze-rule)!important;
+  --nf-border-top:1px solid var(--reze-rule)!important;
+  --nf-border-right:1px solid var(--reze-rule)!important;
+  --nf-border-bottom:1px solid var(--reze-rule)!important;
+  --nf-border-left:1px solid var(--reze-rule)!important;
+  --nf-scheme:light!important;
+  --nf-safe:#047857!important;
+  --nf-warning:#92400e!important;
+  --nf-danger:#b91c1c!important;
+}
+:root.reze-theme.dark #nf-floating-widget {
+  --nf-panel-solid:#101f31;
+  --nf-scheme:dark!important;
+  --nf-safe:#6ee7b7!important;
+  --nf-warning:#fde68a!important;
+  --nf-danger:#fca5a5!important;
+}
+:root.reze-theme #nf-floating-widget .nf-widget-card {
+  background:var(--nf-panel-solid)!important;
+  background-image:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+:root.reze-theme #nf-floating-widget :is(.nf-header,.nf-kpi-bar,.nf-filter-bar,.nf-list,.nf-footer) {
+  background:var(--nf-panel-solid)!important;
+  background-image:none!important;
+}
+/* These surfaces share the homepage glass palette, above the opaque panel. */
+:root.reze-theme #nf-floating-widget :is(.nf-node-card,.nf-node-card:hover,.nf-kpi-item) {
+  background:linear-gradient(135deg,rgb(132 180 220 / .055),transparent 58%),var(--reze-glass-surface,var(--card))!important;
+  border:1px solid var(--reze-rule)!important;
+  border-radius:var(--nf-radius,12px)!important;
+  box-shadow:inset 0 1px rgb(219 238 255 / .13),0 12px 34px rgb(2 12 24 / .16)!important;
+  backdrop-filter:var(--reze-glass-filter,blur(20px) saturate(125%))!important;
+  -webkit-backdrop-filter:var(--reze-glass-filter,blur(20px) saturate(125%))!important;
+}
+@media(hover:none),(pointer:coarse) {
+  :root.reze-theme #nf-floating-widget :is(.nf-node-card,.nf-node-card:hover,.nf-kpi-item) {
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
+@media(prefers-reduced-transparency:reduce) {
+  :root.reze-theme #nf-floating-widget :is(.nf-node-card,.nf-node-card:hover,.nf-kpi-item) {
+    background:var(--nf-panel-solid)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
+
+/* Small emblems retain the transparent cutout's own proportions. */
+:root.reze-theme .ichigo-preview-emblem {display:block;width:20px;height:20px;object-fit:contain;flex-shrink:0}
+:root.reze-theme .ichigo-bubble-emblem {display:block;width:14px;height:14px;object-fit:contain;flex-shrink:0}
+
+/* Compact protocol labels fit the existing uptime and billing strip. */
+:root.reze-theme .node-card .ichigo-ip-families {display:inline-flex;align-items:center;gap:.3em;flex-shrink:0;font-size:var(--ichigo-ip-label-size,11px);line-height:1.2}
+:root.reze-theme .node-card .ichigo-ip-badge {display:inline-flex;align-items:center;flex-shrink:0;padding:.1em .45em;border:1px solid currentColor;border-radius:.4em;font-weight:600;white-space:nowrap}
+:root.reze-theme .node-card .ichigo-ip-badge--v4 {color:#8dbce6;background:rgb(65 139 206 / .08);border-color:rgb(141 188 230 / .32)}
+:root.reze-theme .node-card .ichigo-ip-badge--v6 {color:#e3b17c;background:rgb(210 148 83 / .08);border-color:rgb(227 177 124 / .32)}
+
+/* Keep the original card proportions in a four-column desktop grid. */
+@media(min-width:1200px) {
+  :root.reze-theme .home-view .nodes [role="tabpanel"] > .grid:has(.node-card) {grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+
+/* The unlock panel uses the same opaque shell as the forecast panel. Runtime
+   theme sampling must not reintroduce the page's character wallpaper. */
+:root.reze-theme #km-unlock-floating-root {
+  --km-ul-solid:#e2eef8;
+  --km-ul-bg:var(--km-ul-solid)!important;
+  --km-ul-panel:var(--km-ul-solid)!important;
+  --km-ul-bg-image:none!important;
+  --km-ul-card-image:none!important;
+  --km-ul-card:var(--reze-glass-surface,var(--card))!important;
+  --km-ul-text:var(--foreground)!important;
+  --km-ul-muted:var(--muted-foreground)!important;
+  --km-ul-border:var(--reze-rule)!important;
+  --km-ul-cyan:var(--primary)!important;
+  --km-ul-accent-text:var(--primary)!important;
+  --km-ul-footer-bg:var(--km-ul-solid)!important;
+  --km-ul-modal-bg:var(--km-ul-solid)!important;
+  background:var(--km-ul-solid)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+:root.reze-theme.dark #km-unlock-floating-root {--km-ul-solid:#101f31}
+:root.reze-theme :is(#km-ul-about-modal,#km-ul-debug-modal) {
+  --km-ul-modal-bg:#101f31!important;
+  --km-ul-debug-bg:#0c1928!important;
+  --km-ul-text:var(--foreground)!important;
+  --km-ul-muted:var(--muted-foreground)!important;
+  --km-ul-border:var(--reze-rule)!important;
+  --km-ul-cyan:var(--primary)!important;
+}
+:root.reze-theme #km-unlock-floating-root :is(.km-ul-header,.km-ul-body,.km-ul-footer) {
+  background:var(--km-ul-solid)!important;
+  background-image:none!important;
+}
+:root.reze-theme #km-unlock-floating-root .km-ul-service-card {
+  background:linear-gradient(135deg,rgb(132 180 220 / .055),transparent 58%),var(--reze-glass-surface,var(--card))!important;
+  backdrop-filter:var(--reze-glass-filter,blur(20px) saturate(125%));
+  -webkit-backdrop-filter:var(--reze-glass-filter,blur(20px) saturate(125%));
+}
+/* Respect narrow viewports and short windows instead of the plugin's fixed
+   minimum dimensions taking precedence over its maximum dimensions. */
+:root.reze-theme #nf-floating-widget .nf-widget-card {min-width:min(320px,calc(100vw - 28px))!important;min-height:0!important}
+:root.reze-theme #km-unlock-floating-root {min-height:min(220px,calc(100dvh - 20px))!important}
+@media(hover:none),(pointer:coarse),(prefers-reduced-transparency:reduce) {
+  :root.reze-theme #km-unlock-floating-root .km-ul-service-card {backdrop-filter:none;-webkit-backdrop-filter:none}
+}
