@@ -21,6 +21,9 @@ def main():
     snapshots = next((item for item in data if item.get('key') == 'pandaOpsRouteProbeResults'), None)
     if snapshots and json.loads(snapshots.get('default') or '{}') != {}:
         raise SystemExit('Public packages must not contain private route snapshots.')
+    address_families = next((item for item in data if item.get('key') == 'azeNodeAddressFamilies'), None)
+    if address_families and json.loads(address_families.get('default') or '{}') != {}:
+        raise SystemExit('Public packages must not contain private address-family summaries.')
     index = ROOT / 'dist/index.html'
     if not index.is_file():
         raise SystemExit('dist/index.html is missing.')
