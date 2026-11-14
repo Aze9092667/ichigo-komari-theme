@@ -1,10 +1,10 @@
 {
   "name": "Ichigo · BLEACH / 三网回程版",
   "short": "Reze-Route",
-  "description": "Ichigo / BLEACH 定制 Komari 主题：深色蓝灰玻璃、三网回程、等高卡片和多目标延迟。",
-  "version": "1.2.3-aze.26",
+  "description": "Ichigo / BLEACH 定制 Komari 主题：橙黑配色、一护人物拼图、三网回程、等高卡片和多目标延迟。",
+  "version": "1.2.3-aze.32",
   "author": "Reze Theme Contributors",
-  "preview": "dist/images/ichigo/preview-ichigo-aze12.png",
+  "preview": "dist/images/ichigo/preview-orange-v27.png",
   "configuration": {
     "type": "managed",
     "name": "Ichigo · 外观、监控与回程",
@@ -521,7 +521,7 @@
         "key": "rezeGlassTransparency",
         "name": "探针框默认透明度",
         "type": "number",
-        "default": 32,
+        "default": 0,
         "help": "范围 0-100%。0 为实色，100 为完全透明。只影响面板背景，文字保持清晰。访客可以在外观面板中为自己的浏览器覆盖此值。"
       },
       {

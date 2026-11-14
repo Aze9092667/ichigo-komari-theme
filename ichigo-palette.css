@@ -192,3 +192,353 @@
 @media(hover:none),(pointer:coarse),(prefers-reduced-transparency:reduce) {
   :root.reze-theme #km-unlock-floating-root .km-ul-service-card {backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+
+/* Approved orange / warm charcoal appearance. Append after the inherited palette. */
+:root.reze-theme,
+:root.reze-theme.dark {
+  color-scheme:dark;
+  --background:#f88837;
+  --foreground:#fff2e6;
+  --card:#211c18;
+  --card-foreground:#fff2e6;
+  --popover:#2c251f;
+  --popover-foreground:#fff2e6;
+  --primary:#f88837;
+  --primary-foreground:#191614;
+  --secondary:#2c251f;
+  --secondary-foreground:#fff2e6;
+  --muted:#33291f;
+  --muted-foreground:#c6b4a4;
+  --accent:#3a2c21;
+  --accent-foreground:#fff2e6;
+  --border:#5b4030;
+  --input:#5b4030;
+  --ring:#f88837;
+  --selection:#f88837;
+  --reze-panel:#211c18;
+  --reze-paper:#2c251f;
+  --reze-rule:#5b4030;
+  --reze-gold:#f88837;
+  --info:#99b9ce;
+  --success:#96c0a4;
+  --warning:#f5bc5f;
+  --destructive:#f09383;
+  --chart-1:#f88837;
+  --chart-2:#96c0a4;
+  --chart-3:#c6a0ea;
+  --chart-4:#f5bc5f;
+  --chart-5:#99b9ce;
+  /* Inline colors computed by the inherited blue theme must not recolor text. */
+  --glass-light-card:#211c18!important;
+  --glass-dark-card:#211c18!important;
+  --glass-light-card-hover:#211c18!important;
+  --glass-dark-card-hover:#211c18!important;
+  --glass-light-control:#2c251f!important;
+  --glass-dark-control:#2c251f!important;
+  --glass-light-header:#191614!important;
+  --glass-dark-header:#191614!important;
+  --glass-light-text:#fff2e6!important;
+  --glass-dark-text:#fff2e6!important;
+  --glass-light-muted-text:#c6b4a4!important;
+  --glass-dark-muted-text:#c6b4a4!important;
+  --glass-light-border:#5b4030!important;
+  --glass-dark-border:#5b4030!important;
+  --glass-light-shadow:0 5px 0 rgb(142 67 21 / .18)!important;
+  --glass-dark-shadow:0 5px 0 rgb(142 67 21 / .18)!important;
+  /* Retain the existing transparency slider, but use the new warm card color. */
+  --reze-glass-light:rgb(33 28 24 / var(--reze-glass-alpha,1))!important;
+  --reze-glass-dark:rgb(33 28 24 / var(--reze-glass-alpha,1))!important;
+  --reze-glass-light-solid:#211c18!important;
+  --reze-glass-dark-solid:#211c18!important;
+  --reze-glass-surface:rgb(33 28 24 / var(--reze-glass-alpha,1))!important;
+  --reze-glass-solid:#211c18!important;
+  background:#f88837!important;
+}
+
+:root.reze-theme body { background:#f88837!important; }
+:root.reze-theme .background-container,
+:root.reze-theme .background-container .default-background {
+  background:#f88837!important;
+  background-image:none!important;
+  filter:none!important;
+}
+:root.reze-theme .background-container .reze-scrim,
+:root.reze-theme.dark .background-container .reze-scrim {
+  background:transparent!important;
+}
+/* Remove the previous portrait, custom wallpaper and its tint from this design. */
+:root.reze-theme .background-container :is(.background-media,.background-image,.background-video,.background-overlay,.background-loading,.gloria-nebula,.gloria-stars) {
+  display:none!important;
+}
+
+:root.reze-theme .reze-header,
+:root.reze-theme.dark .reze-header {
+  background:#191614!important;
+  border-bottom:1px solid #5b4030!important;
+  box-shadow:none!important;
+}
+:root.reze-theme .ichigo-header-logo {
+  display:block;
+  width:172px;
+  height:64px;
+  max-width:100%;
+  flex-shrink:0;
+  object-fit:contain;
+  object-position:left center;
+  filter:none;
+}
+:root.reze-theme .reze-header__inner {
+  max-width:1480px;
+}
+:root.reze-theme .reze-header__download {
+  background:#2c251f;
+  color:#f88837;
+}
+:root.reze-theme .reze-header__download:hover { background:#3a2c21; }
+
+/* The supplied collage is shown completely at its native 4000:884 ratio. */
+:root.reze-theme .reze-hero.ichigo-evolution-hero,
+:root.reze-theme.dark .reze-hero.ichigo-evolution-hero {
+  display:block;
+  position:relative;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:4000 / 884;
+  padding:0;
+  overflow:hidden;
+  border:0;
+  border-radius:0;
+  background:transparent!important;
+  box-shadow:none;
+}
+:root.reze-theme .ichigo-evolution-hero::before,
+:root.reze-theme .ichigo-evolution-hero::after { display:none!important; }
+:root.reze-theme .ichigo-evolution-hero .ichigo-evolution-art {
+  display:block;
+  position:static;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  aspect-ratio:4000 / 884;
+  object-fit:contain;
+  object-position:center;
+  opacity:1;
+  filter:none;
+}
+
+:root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card),
+:root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card):hover {
+  background:var(--reze-glass-surface)!important;
+  color:#fff2e6!important;
+  border-color:#5b4030!important;
+  box-shadow:inset 0 1px rgb(255 221 184 / .09),0 5px 0 rgb(142 67 21 / .18)!important;
+}
+:root.reze-theme :is(.node-card,.gloria-stat-card)::before {
+  background:linear-gradient(90deg,transparent,#8d5e3e,#f88837,transparent)!important;
+}
+:root.reze-theme .bg-background,
+:root.reze-theme.dark .bg-background {
+  background-color:#2c251f!important;
+  color:#fff2e6!important;
+}
+:root.reze-theme :is([role=dialog],[data-slot=dialog-content],[data-slot=popover-content],[data-slot=dropdown-menu-content],.reze-settings-dialog,.reze-wallpaper-dialog) {
+  color:#fff2e6;
+  background:#211c18!important;
+  border-color:#5b4030!important;
+}
+:root.reze-theme .instance-detail {
+  background:#211c18;
+  color:#fff2e6;
+  border:1px solid #5b4030;
+  border-radius:12px;
+}
+:root.reze-theme .reze-glass-preview { background:#f88837!important; }
+:root.reze-theme .reze-glass-preview__card { background:var(--reze-glass-surface)!important; }
+
+/* Text placed directly on orange uses charcoal; card and form text remains cream. */
+:root.reze-theme .reze-section-heading {
+  color:#191614;
+  --foreground:#191614;
+  --muted-foreground:#6a3b20;
+  --reze-gold:#191614;
+}
+:root.reze-theme .reze-section-heading :is(h2,.reze-section-number) { color:#191614; }
+:root.reze-theme .reze-section-heading :is(p,small) { color:#6a3b20!important; }
+:root.reze-theme .reze-section-heading .reze-node-count {
+  color:#c6b4a4;
+  background:#2c251f;
+  border-color:#5b4030;
+}
+:root.reze-theme .reze-footer { color:#6a3b20; }
+:root.reze-theme .reze-footer :is(a,button,.reze-footer__credits button span) { color:#191614; }
+:root.reze-theme .node-info :is([role=tablist],.home-quick-controls,.reze-search input) {
+  color:#fff2e6;
+  background:#211c18!important;
+  border-color:#5b4030!important;
+}
+:root.reze-theme .node-info [role=tab][data-state=active] {
+  color:#f88837;
+  background:#3a2c21;
+}
+:root.reze-theme .node-card .ichigo-ip-badge--v4 {
+  color:#c6b4a4;
+  background:#2c251f;
+  border-color:#5b4030;
+}
+:root.reze-theme .node-card .ichigo-ip-badge--v6 {
+  color:#e3b17c;
+  background:#2c251f;
+  border-color:#6a4a32;
+}
+:root.reze-theme .aze-route-panel {
+  background:#2c251f;
+  border-color:#5b4030;
+}
+:root.reze-theme .aze-rp-tile {
+  background:#241e19;
+  border-color:#433022;
+}
+/* Existing ordinary / quality / premium grade and latency signal colors stay semantic. */
+:root.reze-theme .reze-world-map {
+  --map-empty:rgb(198 180 164 / .09);
+  --map-outline:rgb(198 180 164 / .3);
+  --map-fill:rgb(150 192 164 / .2);
+  --map-online:#96c0a4;
+  --map-partial:#f5bc5f;
+  --map-offline:#f09383;
+  --map-destination:#f88837;
+}
+:root.reze-theme .reze-world-map__heading { background:transparent!important; }
+
+/* Match the existing floating extensions without changing their behavior or geometry. */
+:root.reze-theme #nf-floating-widget,
+:root.reze-theme.dark #nf-floating-widget {
+  --nf-panel-solid:#211c18;
+  --nf-text:#fff2e6!important;
+  --nf-card-text:#fff2e6!important;
+  --nf-muted:#c6b4a4!important;
+  --nf-accent:#f88837!important;
+  --nf-scheme:dark!important;
+  --nf-safe:#96c0a4!important;
+  --nf-warning:#f5bc5f!important;
+  --nf-danger:#f09383!important;
+}
+:root.reze-theme #nf-floating-widget :is(.nf-node-card,.nf-node-card:hover,.nf-kpi-item) {
+  background:#2c251f!important;
+  border-color:#5b4030!important;
+  box-shadow:inset 0 1px rgb(255 221 184 / .07)!important;
+}
+:root.reze-theme #km-unlock-floating-root,
+:root.reze-theme.dark #km-unlock-floating-root {
+  --km-ul-solid:#211c18;
+  --km-ul-text:#fff2e6!important;
+  --km-ul-muted:#c6b4a4!important;
+  --km-ul-cyan:#f88837!important;
+  --km-ul-accent-text:#f88837!important;
+  --km-ul-border:#5b4030!important;
+}
+:root.reze-theme :is(#km-ul-about-modal,#km-ul-debug-modal) {
+  --km-ul-modal-bg:#211c18!important;
+  --km-ul-debug-bg:#191614!important;
+  --km-ul-text:#fff2e6!important;
+  --km-ul-muted:#c6b4a4!important;
+  --km-ul-border:#5b4030!important;
+  --km-ul-cyan:#f88837!important;
+}
+:root.reze-theme #km-unlock-floating-root .km-ul-service-card {
+  background:#2c251f!important;
+  border-color:#5b4030!important;
+}
+:root.reze-theme :is(.ichigo-visitor-card,.ichigo-visitor-bar) {
+  color:#fff2e6;
+  background:#211c18;
+  border-color:#5b4030;
+  box-shadow:0 6px 24px rgb(45 20 4 / .2);
+}
+
+@media(max-width:768px) {
+  :root.reze-theme .ichigo-header-logo { width:135px;height:50px; }
+  :root.reze-theme .reze-hero.ichigo-evolution-hero {
+    height:auto!important;
+    min-height:0!important;
+    margin-top:18px;
+  }
+}
+@media(prefers-reduced-transparency:reduce) {
+  :root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card),
+  :root.reze-theme :is(.node-card,.gloria-stat-card,.bg-card,[data-slot=card],.reze-list-row,.reze-list-header,.reze-map,.reze-glass-preview__card):hover {
+    background:#211c18!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
+
+/* With only the all-servers group, keep its outer frame as the sole surface. */
+:root.reze-theme .node-info .home-groups-scroll [role="tablist"] > [role="tab"][id$="-trigger-all"][data-state="active"]:only-child {
+  background:transparent!important;
+}
+
+
+/* Approved frosted glass appearance; existing preference sliders remain functional. */
+:root.reze-theme,
+:root.reze-theme.dark {
+  --ichigo-header-height:77px;
+  background:linear-gradient(to bottom,#191614 0 var(--ichigo-header-height),#f88837 var(--ichigo-header-height) 100%) fixed!important;
+}
+@media(max-width:768px){
+  :root.reze-theme,:root.reze-theme.dark {--ichigo-header-height:66px;}
+}
+:root.reze-theme .node-info :is(.home-groups-scroll [role=tablist],.home-quick-controls,.reze-search input,.search>button[data-slot=button][data-size=icon]),
+:root.reze-theme #nodes-section .reze-node-count {
+  --ichigo-control-tint:rgb(24 26 28 / calc(var(--reze-glass-alpha,1) * .70));
+  background:linear-gradient(135deg,rgb(255 244 231 / .12),rgb(255 244 231 / .025) 60%),var(--ichigo-control-tint)!important;
+  color:#fff2e6!important;
+  border-color:rgb(255 226 198 / .36)!important;
+  backdrop-filter:blur(calc(var(--reze-glass-blur,20px) * .7)) saturate(115%)!important;
+  -webkit-backdrop-filter:blur(calc(var(--reze-glass-blur,20px) * .7)) saturate(115%)!important;
+  box-shadow:inset 0 1px 0 rgb(255 244 231 / .21),0 2px 8px rgb(67 30 8 / .12)!important;
+}
+:root.reze-theme .node-info .search>button[data-slot=button][data-size=icon] {
+  border:1px solid rgb(255 226 198 / .36)!important;
+}
+:root.reze-theme .node-info .search>button[data-slot=button][data-size=icon][class~="!text-selection"] {
+  --ichigo-control-tint:rgb(24 26 28 / calc(var(--reze-glass-alpha,1) * .82));
+  --background:var(--ichigo-control-tint);
+  --selection:#ffb675;
+  color:var(--selection)!important;
+  border-color:#ffcb9e!important;
+}
+:root.reze-theme .node-info .search>button[data-slot=button][data-size=icon] svg {width:16px;height:16px;opacity:1;}
+:root.reze-theme .node-info .reze-search input::placeholder,
+:root.reze-theme .node-info .reze-search input + svg,
+:root.reze-theme .node-info .home-quick-control[aria-pressed=false] {color:#f1decc;opacity:1;}
+:root.reze-theme .node-info .home-quick-control[aria-pressed=true] {color:#ffcc9d;}
+:root.reze-theme #nodes-section h2 {font-size:17px;font-weight:700;color:#191614;line-height:24px;}
+:root.reze-theme #nodes-section .reze-section-number {font-size:14px;font-weight:700;color:#191614;}
+:root.reze-theme #nodes-section h2 small {font-size:10px;font-weight:600;color:#38251c!important;}
+:root.reze-theme #nodes-section>p,
+:root.reze-theme #nodes-section>p span {font-size:11px;font-weight:650;color:#38251c!important;opacity:1;}
+:root.reze-theme #nodes-section>p i {background:#215b39;box-shadow:none;}
+:root.reze-theme :is(.node-card,.gloria-stat-card,.reze-map),
+:root.reze-theme :is(.node-card,.gloria-stat-card,.reze-map):hover {
+  background:linear-gradient(135deg,rgb(255 244 231 / .12),rgb(255 244 231 / .025) 60%),rgb(24 26 28 / calc(var(--reze-glass-alpha,1) * .70))!important;
+  border-color:rgb(255 226 198 / .36)!important;
+  backdrop-filter:blur(var(--reze-glass-blur,20px)) saturate(115%)!important;
+  -webkit-backdrop-filter:blur(var(--reze-glass-blur,20px)) saturate(115%)!important;
+  box-shadow:inset 0 1px 0 rgb(255 244 231 / .26),inset 0 -1px 0 rgb(255 244 231 / .05),0 8px 26px rgb(67 30 8 / .16)!important;
+}
+/* The route summary (domestic or overseas) and latency table share one inset surface. */
+:root.reze-theme .node-card :is(.aze-route-panel,.node-ping-task-table) {
+  background:rgb(255 245 231 / .07)!important;
+  border-color:rgb(231 197 130 / .08)!important;
+}
+:root.reze-theme .node-card .aze-route-panel .aze-rp-tile {
+  background:transparent!important;
+  border-color:rgb(255 224 196 / .1)!important;
+}
+:root.reze-theme .node-info .home-groups-scroll [role="tab"][id$="-trigger-all"]:only-child[data-state="active"] {
+  background:transparent!important;
+}
+

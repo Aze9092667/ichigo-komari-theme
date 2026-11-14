@@ -5,3 +5,6 @@ release/
 .DS_Store
 __pycache__/
 *.pyc
+
+# Local deployment bookkeeping is not public theme source.
+orange-deployment.json
