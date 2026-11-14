@@ -1,5 +1,15 @@
 /* Fixed slots reserve the same space for domestic, pending and successful nodes. */
-.node-card { height:560px !important; min-height:560px !important; max-height:560px !important; }
+.node-card { height:720px !important; min-height:720px !important; max-height:720px !important; }
+@media(min-width:768px) { .node-card { height:696px !important; min-height:696px !important; max-height:696px !important; } }
+.node-ping-task-table { flex-shrink:0; overflow:visible !important; container-type:inline-size; }
+.node-ping-task-table [data-node-ping-task-row] { min-height:32px; }
+.node-ping-task-table .node-ping-task-grid { grid-template-columns:minmax(0,.28fr) minmax(0,.36fr) minmax(0,.36fr) !important; }
+.node-ping-task-table [data-family-state="absent"] { color:var(--muted-foreground); }
+.node-ping-task-table [data-family-state="absent"] [data-node-ping-bars] { opacity:.35; }
+.ichigo-ping-task-name { display:flex; align-items:center; gap:2px; max-width:100%; min-width:0; white-space:nowrap; font-size:clamp(9.5px,3.7cqw,11px); line-height:1.3; letter-spacing:-.15px; }
+.ichigo-ping-label { white-space:nowrap; }
+.ichigo-ping-version { flex-shrink:0; padding:1px 2px; border-radius:3px; background:color-mix(in srgb,var(--muted-foreground) 10%,transparent); font-size:8px; line-height:1.2; letter-spacing:0; }
+.ichigo-ping-family-none { display:inline-block; margin-top:2px; padding:1px 3px; border:1px solid color-mix(in srgb,var(--muted-foreground) 20%,transparent); border-radius:4px; background:color-mix(in srgb,var(--muted-foreground) 7%,transparent); color:var(--muted-foreground); font-size:8px; line-height:1.3; font-weight:400; white-space:nowrap; }
 .aze-route-panel { box-sizing:border-box; height:132px; min-height:132px; max-height:132px; flex-shrink:0; padding:10px; overflow:hidden; border:1px solid color-mix(in srgb,var(--primary) 22%,transparent); border-radius:13px; background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 7%,transparent),color-mix(in srgb,var(--foreground) 3%,transparent)); color:var(--foreground); }
 .aze-rp-head { display:flex; align-items:center; gap:6px; height:17px; margin-bottom:8px; }
 .aze-rp-title { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:650; letter-spacing:.06em; }
@@ -27,4 +37,14 @@
 .aze-rp-foot { display:flex; align-items:center; gap:5px; overflow:hidden; height:14px; margin-top:6px; white-space:nowrap; font-size:8px; line-height:14px; color:var(--muted-foreground); }
 .aze-rp-dot { width:4px; height:4px; border-radius:50%; flex-shrink:0; background:var(--primary); opacity:.7; }
 @media(max-width:420px) { .aze-rp-value{font-size:11px} }
+@media(min-width:1440px) { :root.reze-theme .max-w-\[1320px\]:has(.home-view) { max-width:1480px !important; } }
+
+/* Keep finance controls above the full-width content in this dialog only. */
+.ichigo-finance-tabs { display:flex !important; flex-direction:column !important; width:100%; min-width:0; }
+.ichigo-finance-tabs > [data-slot="tabs-content"] { flex:0 0 auto; width:100%; min-width:0; }
+@media(max-width:639px) {
+  .ichigo-finance-tabs > div:first-child { flex-direction:column; align-items:stretch; }
+  .ichigo-finance-tabs > div:first-child > [data-slot="tabs-list"] { width:100%; flex:none; }
+  .ichigo-finance-tabs > div:first-child > label { align-self:flex-end; margin-left:0; }
+}
 

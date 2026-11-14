@@ -21,9 +21,11 @@ const c = vm.createContext({Date,console,AbortSignal,navigator:{},document:{hidd
   let data
   if(path==='/api/public') data=pub
   else if(path==='/api/me') data={logged_in:admin}
+  else if(path==='/api/task/ping') data=[]
+  else if(path==='/api/admin/client/list') { assert.equal(admin,true);data=authNodes }
   else if(path==='/api/nodes') {
     if(init.credentials==='omit' && anonymousFails) return {ok:false,status:503}
-    data=init.credentials==='omit' || !admin ? publicNodes : authNodes
+    data=publicNodes.map(node=>({...node,ipv4:'',ipv6:''}))
   }
   else if(path.startsWith('/api/admin/theme/settings')) {
     assert.equal(admin,true)
@@ -50,7 +52,7 @@ assert.deepEqual(clone(c.normalizeAddressFamilies('{"n":{"ipv4":true,"ipv6":fals
 assert.equal(await c.load(),true)
 assert.equal(writes.length,1)
 const summary=JSON.parse(pub.theme_settings.azeNodeAddressFamilies)
-assert.deepEqual(summary,{dual:{ipv4:true,ipv6:true},none:{ipv4:false,ipv6:false},v4:{ipv4:true,ipv6:false},v6:{ipv4:false,ipv6:true}})
+assert.deepEqual(summary,{dual:{ipv4:true,ipv6:true},none:{ipv4:false,ipv6:false},v4:{ipv4:true,ipv6:false},v6:{ipv4:false,ipv6:true},missing:{ipv4:false,ipv6:false}})
 assert.deepEqual(pub.theme_settings.untouched,{nested:'keep'})
 assert.equal(pub.theme_settings.azeRouteAuto,false)
 for(const flags of Object.values(summary)) assert.deepEqual(Object.keys(flags).sort(),['ipv4','ipv6'])
@@ -74,7 +76,10 @@ assert.equal(c.renderAddressBadges({uuid:'none'}),null)
 assert.equal(c.renderAddressBadges({uuid:'missing'}),null)
 assert.equal(JSON.stringify(dualBadge).includes('192.0.2.'),false)
 assert.equal(JSON.stringify(dualBadge).includes('2001:db8'),false)
-assert.deepEqual(clone(c.nodeAddressFamilies({uuid:'dual',ipv4:'masked',ipv6:'hidden'},summary)),{ipv4:false,ipv6:false})
+assert.deepEqual(clone(c.nodeAddressFamilies({uuid:'dual',ipv4:'masked',ipv6:'hidden'},summary)),{ipv4:true,ipv6:true})
+assert.deepEqual(clone(c.nodeAddressFamilyState({uuid:'never-observed',ipv4:'',ipv6:''},summary)),{},'redacted addresses never prove absence')
+assert.deepEqual(clone(c.reportedAddressFamilies([{uuid:'masked',ipv4:'masked',ipv6:'hidden'}])),{},'masked strings must not publish absent-family flags')
+assert.deepEqual(clone(c.mergeAddressFamilies({},c.reportedAddressFamilies([{uuid:'partial',ipv4:'192.0.2.20'}]),['partial'])),{partial:{ipv4:true,ipv6:false}},'authenticated omitempty fields represent an absent family')
 await assert.rejects(c.syncAddressFamilies(c.reportedAddressFamilies(authNodes)),/登录已失效/)
 assert.equal(writes.length,1)
 

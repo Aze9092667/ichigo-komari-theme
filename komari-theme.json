@@ -2,7 +2,7 @@
   "name": "Ichigo · BLEACH / 三网回程版",
   "short": "Reze-Route",
   "description": "Ichigo / BLEACH 定制 Komari 主题：深色蓝灰玻璃、三网回程、等高卡片和多目标延迟。",
-  "version": "1.2.3-aze.16",
+  "version": "1.2.3-aze.26",
   "author": "Reze Theme Contributors",
   "preview": "dist/images/ichigo/preview-ichigo-aze12.png",
   "configuration": {
@@ -198,10 +198,10 @@
       },
       {
         "key": "visitorInfoEnabled",
-        "name": "显示观众/管理员信息",
+        "name": "显示访客/管理员信息",
         "type": "switch",
         "default": false,
-        "help": "开启后显示底部 IP 状态条；宽屏左下角同时显示详情卡。访客称为“观众”，已登录管理员称为“管理员”。"
+        "help": "显示访问者自己的公网出口、粗略地区、设备和浏览器信息；默认关闭。开启后浏览器依次向 ipwho.is、ipapi.co 或 api.ip.sb 查询自身网络信息，不发送站点或节点数据。宽屏侧边留白足够时显示详情卡，其他电脑端可从底部展开。"
       },
       {
         "key": "glassColorPreset",
@@ -236,14 +236,14 @@
         "type": "select",
         "default": "自定义",
         "options": "官方,基础,运维,资源,财务,流量,GPU,资产,完整,自定义",
-        "help": "当前默认与前端六项指标一一对应：在线、内存、上行、硬盘、累计流量、下行。选择“自定义”后读取下方 keys。"
+        "help": "切换概览卡片组合。默认显示在线节点、平均 CPU、内存、累计流量、上行和下行；可通过自定义组合选择资产总值等其他指标。"
       },
       {
         "key": "generalCardKeys",
         "name": "自定义首页总览指标 keys",
         "type": "richtext",
         "default": "onlineNodes\navgCpu\nmemory\ntotalTraffic\nuploadSpeed\ndownloadSpeed",
-        "help": "以逗号或换行分隔。onlineNodes=在线；avgCpu=CPU；memory=内存；totalTraffic=累计流量；uploadSpeed=上行；downloadSpeed=下行。"
+        "help": "以逗号或换行分隔。onlineNodes=在线；avgCpu=CPU；memory=内存；totalTraffic=累计流量；uploadSpeed=上行；downloadSpeed=下行。 可在末尾添加 remainingValue 启用资产总值（剩余价值折合），与其他 key 用英文逗号分隔。"
       },
       {
         "name": "04 · 管理员工具与隐私",
