@@ -1,6 +1,6 @@
 # Ichigo · BLEACH — Komari 主题
 
-为 Komari 定制的 BLEACH 风格监控主题。当前版本 **1.2.3-aze.35**，使用橙色背景、BLEACH 角色拼图、暖色磨砂玻璃卡片和骷髅牌图标。
+为 Komari 定制的 BLEACH 风格监控主题。当前版本 **1.2.3-aze.36**，使用橙色背景、BLEACH 角色拼图、暖色磨砂玻璃卡片和骷髅牌图标。
 
 ![主题预览](preview.png)
 

@@ -54,6 +54,8 @@ function patchOnce(text,before,after,label){
   if(text.split(before).length!==2)throw Error(`Unexpected production ${label}`)
   return text.replace(before,after)
 }
+// The site's global header rules must not paint a separate surface inside the map card.
+general=patchOnce(general,'u("header",Fa,[l[1]||(l[1]=u("h2"','u("div",Fa,[l[1]||(l[1]=u("h2"','world map heading')
 general=patchOnce(general,
   'case"remainingValue":return{key:"remainingValue",label:"剩余价值",icon:"tabler:cash",value:y.value?`${Je.value.symbol}${Je.value.value}`:"***",tooltip:Lt.value}',
   'case"remainingValue":return{key:"remainingValue",label:"资产总值",subtitle:"剩余价值折合",icon:"tabler:cash",value:y.value?`${Je.value.symbol}${Je.value.value}`:"***",tooltip:Lt.value,action:y.value?"financeDetails":void 0}',

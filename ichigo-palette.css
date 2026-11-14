@@ -36,7 +36,13 @@
 :root.reze-theme .reze-hero__portrait img {object-position:50% 42%}
 :root.reze-theme .reze-hero__portrait-shade {background:linear-gradient(90deg,#dfeef8 0%,rgb(223 238 248 / .72) 16%,transparent 52%),linear-gradient(0deg,rgb(16 40 60 / .26),transparent 48%)!important}
 :root.reze-theme.dark .reze-hero__portrait-shade {background:linear-gradient(90deg,#142a3e 0%,rgb(20 42 62 / .8) 14%,rgb(20 42 62 / .2) 34%,transparent 52%),linear-gradient(0deg,rgb(8 21 35 / .52),transparent 48%)!important}
-:root.reze-theme .reze-world-map__heading {background:transparent!important;box-shadow:none!important;border:0!important}
+:root.reze-theme .reze-world-map__heading {
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
 :root.reze-theme .reze-world-map {--map-empty:rgb(151 182 210 / .08);--map-outline:rgb(151 182 210 / .24);--map-destination:var(--primary)}
 :root.reze-theme .reze-companion {display:none!important}
 :root.reze-theme .reze-companion__bubble {background:var(--reze-panel);border-color:var(--reze-rule)}
@@ -410,7 +416,6 @@
   --map-offline:#f09383;
   --map-destination:#f88837;
 }
-:root.reze-theme .reze-world-map__heading { background:transparent!important; }
 
 /* Match the existing floating extensions without changing their behavior or geometry. */
 :root.reze-theme #nf-floating-widget,
