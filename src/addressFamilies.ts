@@ -1,5 +1,5 @@
 export type AddressFamilyFlags = { ipv4: boolean, ipv6: boolean }
-export type AddressFamilySummary = Record<string, AddressFamilyFlags>
+export type AddressFamilySummary = Record<string, Partial<AddressFamilyFlags>>
 export type AddressFamilyObservations = Record<string, Partial<AddressFamilyFlags>>
 export const ADDRESS_FAMILIES_KEY = 'azeNodeAddressFamilies'
 
@@ -40,31 +40,41 @@ export function normalizeAddressFamilies(raw: unknown): AddressFamilySummary {
   try { if (typeof raw === 'string') raw = JSON.parse(raw) } catch { return {} }
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {}
   return Object.fromEntries(Object.entries(raw as Record<string, any>).filter(([id, flags]) => id && flags && typeof flags === 'object' &&
-    typeof flags.ipv4 === 'boolean' && typeof flags.ipv6 === 'boolean').map(([id, flags]) => [id, { ipv4: flags.ipv4, ipv6: flags.ipv6 }]))
+    ['ipv4','ipv6'].some(key => typeof flags[key] === 'boolean') && ['ipv4','ipv6'].every(key => !Object.hasOwn(flags,key) || typeof flags[key] === 'boolean'))
+    .map(([id, flags]) => [id, Object.fromEntries(['ipv4','ipv6'].filter(key => typeof flags[key] === 'boolean').map(key => [key,flags[key]]))]))
 }
 
+// Only call this for the authenticated client list. Public node APIs redact both addresses.
 export function reportedAddressFamilies(nodes: any[]): AddressFamilyObservations {
-  return Object.fromEntries(nodes.filter(node => node && typeof node.uuid === 'string' && node.uuid &&
-    (Object.hasOwn(node, 'ipv4') || Object.hasOwn(node, 'ipv6'))).map(node => {
+  return Object.fromEntries(nodes.filter(node => node && typeof node.uuid === 'string' && node.uuid).map(node => {
     const flags: Partial<AddressFamilyFlags> = {}
-    if (Object.hasOwn(node, 'ipv4')) flags.ipv4 = validReportedAddress(node.ipv4, 'ipv4')
-    if (Object.hasOwn(node, 'ipv6')) flags.ipv6 = validReportedAddress(node.ipv6, 'ipv6')
+    for (const family of ['ipv4','ipv6'] as const) {
+      // The authenticated Client schema omits empty addresses via omitempty.
+      if (!Object.hasOwn(node,family)) {flags[family]=false;continue}
+      if (validReportedAddress(node[family],family)) flags[family] = true
+      else if (typeof node[family] === 'string' && ['',family==='ipv4'?'0.0.0.0':'::',...(family==='ipv6'?['0:0:0:0:0:0:0:0']:[])].includes(node[family].trim())) flags[family] = false
+    }
     return [node.uuid, flags]
-  }))
+  }).filter(([,flags]) => Object.keys(flags).length))
 }
 
 export function mergeAddressFamilies(current: AddressFamilySummary, observed: AddressFamilyObservations, publicIds: string[]): AddressFamilySummary {
   return Object.fromEntries([...new Set(publicIds)].sort().filter(id => Object.hasOwn(current, id) || Object.hasOwn(observed, id)).map(id => {
     const old = Object.hasOwn(current, id) ? current[id] : undefined
     const fresh = Object.hasOwn(observed, id) ? observed[id] : undefined
-    return [id, { ipv4: fresh?.ipv4 ?? old?.ipv4 === true, ipv6: fresh?.ipv6 ?? old?.ipv6 === true }]
+    return [id, {...old,...fresh}]
   }))
 }
 
-export function nodeAddressFamilies(node: any, summary: AddressFamilySummary = {}): AddressFamilyFlags {
+export function nodeAddressFamilyState(node: any, summary: AddressFamilySummary = {}): Partial<AddressFamilyFlags> {
   const saved = Object.hasOwn(summary, node?.uuid) ? summary[node.uuid] : undefined
-  return {
-    ipv4: node && Object.hasOwn(node, 'ipv4') ? validReportedAddress(node.ipv4, 'ipv4') : saved?.ipv4 === true,
-    ipv6: node && Object.hasOwn(node, 'ipv6') ? validReportedAddress(node.ipv6, 'ipv6') : saved?.ipv6 === true
-  }
+  const state: Partial<AddressFamilyFlags> = {...saved}
+  // An empty public field is redacted, not evidence that the family is absent.
+  for (const family of ['ipv4','ipv6'] as const) if (validReportedAddress(node?.[family],family)) state[family]=true
+  return state
+}
+
+export function nodeAddressFamilies(node: any, summary: AddressFamilySummary = {}): AddressFamilyFlags {
+  const state=nodeAddressFamilyState(node,summary)
+  return {ipv4:state.ipv4===true,ipv6:state.ipv6===true}
 }

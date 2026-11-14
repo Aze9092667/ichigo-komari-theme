@@ -52,12 +52,15 @@ async function syncAddressFamilies(observed: AddressFamilyObservations) {
   })
 }
 export async function load() {
-  const [pub,nodes,me] = await Promise.all([json('/api/public'),json('/api/nodes'),json('/api/me')])
+  const [pub,nodes,me,pingTasks] = await Promise.all([json('/api/public'),json('/api/nodes'),json('/api/me'),json('/api/task/ping').catch(()=>null)])
   if (pub.theme !== THEME) return false
   const roster = Array.isArray(nodes) ? nodes : []
   acceptSettings(pub)
-  update({nodes:roster, admin:!!me.logged_in})
-  if (me.logged_in && Array.isArray(nodes)) await syncAddressFamilies(reportedAddressFamilies(roster)).catch(() => {})
+  update({nodes:roster, admin:!!me.logged_in,...(Array.isArray(pingTasks)?{pingTasks,pingTasksLoaded:true}:{})})
+  if (me.logged_in) {
+    const authenticatedNodes=await json('/api/admin/client/list').catch(()=>null)
+    if(Array.isArray(authenticatedNodes))await syncAddressFamilies(reportedAddressFamilies(authenticatedNodes)).catch(() => {})
+  }
   return true
 }
 async function save(incoming:Record<string,string>) {
