@@ -1,4 +1,6 @@
 import fs from 'node:fs'
+import { installBleachIntro } from './intro/install.mjs'
+import { headerLogoPath, headerLogoSvg, installHeaderLogo } from './intro/header-logo.mjs'
 const build=JSON.parse(fs.readFileSync('komari-theme.json','utf8')).version.split('.').at(-1)
 const source=fs.readFileSync('addon-build/aze-route-v123.js','utf8').replaceAll('vue-vendor-D4cUfCy9.js',`vue-vendor-D4cUfCy9-aze${build}.js`)
 fs.writeFileSync(`dist/assets/aze-route-v123-${build}.js`,source)
@@ -99,7 +101,8 @@ main=patchOnce(main,
   'default:O(()=>[I(va),I(Re,{css:',
   'default:O(()=>[I(va),I(IchigoVisitorInfo,{enabled:g(t).visitorInfoEnabled,admin:g(t).privateFeaturesAllowed},null,8,["enabled","admin"]),I(Re,{css:',
   'visitor app mount')
-fs.writeFileSync(`${assets}/${mainFile}`,main)
+fs.writeFileSync(`dist${headerLogoPath}`,headerLogoSvg)
+fs.writeFileSync(`${assets}/${mainFile}`,installHeaderLogo(main))
 let html=fs.readFileSync('dist/index.html','utf8')
 if(!html.includes(`/assets/visitor-aze${build}.css`))html=html.replace('</head>',`<link rel="stylesheet" href="/assets/visitor-aze${build}.css"/>\n</head>`)
-fs.writeFileSync('dist/index.html',html)
+fs.writeFileSync('dist/index.html',installBleachIntro(html))

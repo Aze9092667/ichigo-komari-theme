@@ -4,7 +4,7 @@
 
 使用 Node 24 与 Python 3。首次安装执行 `npm ci`，然后依次执行 `npm test`、`npm run check`、`npm run build`、`npm run package`。安装包生成到 `release/Ichigo-Komari-Theme.zip`。脚本只打包 `komari-theme.json`、`preview.png`、`TRANSIT-LICENSE.txt`、`THIRD_PARTY_NOTICES.md` 和 `dist/`，不会包含源码目录、依赖或本机工作文件。
 
-当前发布版本为 `1.2.3-aze.32`。扩展入口 `src/index.ts`，链路数据和权限控制 `src/service.ts`，样式 `aze-route.css`。`src/visitorInfo.ts` 和 `visitor.css` 提供默认关闭的访客信息。扩展复用原主题 Vue 运行时，避免加载两个 Vue。`build-addon.mjs` 还会校验并重复应用已编译卡片、拨测、财务概览和访客入口的接入补丁。主题升级或修改入口文件时，应同步更换全部 JS/CSS 文件名和引用，避免缓存中的旧模块与新入口混用。
+当前版本为 `1.2.3-aze.35`。扩展入口 `src/index.ts`，链路数据和权限控制 `src/service.ts`，样式 `aze-route.css`。`src/visitorInfo.ts` 和 `visitor.css` 提供默认关闭的访客信息。扩展复用原主题 Vue 运行时，避免加载两个 Vue。`build-addon.mjs` 还会校验并重复应用已编译卡片、拨测、财务概览和访客入口的接入补丁。主题升级或修改入口文件时，应同步更换全部 JS/CSS 文件名和引用，避免缓存中的旧模块与新入口混用。
 
 标题使用 div 而非 header，避免继承原主题全局 header 深色背景。桌面宽度 ≥1200px 时，首页卡片网格固定四列；768px 起卡片统一高 696px，手机端高 720px，回程/国内链路槽统一 132px。首页可完整展示八个拨测目标，不使用协议切换或滚动槽；宽屏内容容器最大 1480px。
 
@@ -28,7 +28,7 @@ GitHub Actions 会在主分支、拉取请求及手动运行时验证构建并�
 
 ## 橙色玻璃外观
 
-使用 `dist/images/ichigo/evolution-orange-v27.webp` 的完整透明拼图，保持 4000:884 比例；页头使用 `bleach-tybw-v9.svg`。`ichigo-palette.css` 是定制样式源，构建时同步到版本化生产资源，当前资源后缀为 aze32。
+使用 `dist/images/ichigo/evolution-orange-v27.webp` 的完整透明拼图，保持 4000:884 比例。页头的纯白日文 SVG 由 `intro/header-logo.mjs` 从开场标志生成。`ichigo-palette.css` 是定制样式源，构建时同步到后缀为 aze35 的生产资源。
 
 首页统计、地图、服务器卡片和工具栏采用暖色透明玻璃。本地链路与三网回程共用 `.aze-route-panel` 结构，与拨测表统一为浅色透明内层；三项信息小卡片使用透明背景，线路分级语义颜色保持独立。
 
